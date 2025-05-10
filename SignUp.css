@@ -1,0 +1,368 @@
+:root {
+    --cosmic-blue: #5e9fff;
+    --neon-purple: #b388ff;
+    --deep-space: #0a0a1a;
+    --star-light: rgba(255, 255, 255, 0.9);
+    --error-red: #ff4d6d;
+    --royal-blue: #4169e1;
+    --vibrant-orange: #ff7b25;
+    --pure-white: #ffffff;
+    --electric-blue: #3a86ff;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html, body {
+    width: 100%;
+    height: 100%;
+    position: fixed;
+    overflow: hidden;
+}
+
+body {
+    background: 
+        linear-gradient(45deg, var(--pure-white) 0%, transparent 70%),
+        linear-gradient(135deg, var(--electric-blue) 10%, transparent 80%),
+        linear-gradient(225deg, var(--royal-blue) 20%, transparent 80%),
+        linear-gradient(315deg, var(--vibrant-orange) 30%, transparent 70%);
+    background-size: 400% 400%;
+    background-color: var(--deep-space);
+    animation: colorWave 17s ease infinite;
+    color: white;
+    font-family: 'Space Grotesk', sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    perspective: 1000px;
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    min-height: 100vh;
+    overflow: hidden;
+}
+
+@keyframes colorWave {
+    0% { background-position: 0% 0%, 100% 100%, 0% 100%, 100% 0%; }
+    25% { background-position: 100% 0%, 0% 100%, 100% 100%, 0% 0%; }
+    50% { background-position: 100% 100%, 0% 0%, 100% 0%, 0% 100%; }
+    75% { background-position: 0% 100%, 100% 0%, 0% 0%, 100% 100%; }
+    100% { background-position: 0% 0%, 100% 100%, 0% 100%, 100% 0%; }
+}
+
+#particles-js {
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    z-index: 1;
+    top: 0;
+    left: 0;
+}
+
+.cosmic-portal {
+    position: relative;
+    z-index: 10;
+    width: 90%;
+    max-width: 500px;
+    max-height: 90vh;
+    padding: 30px;
+    background: rgba(10, 10, 30, 0.7);
+    border-radius: 25px;
+    box-shadow: 
+        0 0 150px rgba(94, 159, 255, 0.4),
+        0 0 150px rgba(179, 136, 255, 0.3),
+        inset 0 0 30px rgba(100, 200, 255, 0.5);
+    border: 1px solid rgba(100, 200, 255, 0.3);
+    backdrop-filter: blur(8px);
+    transform-style: preserve-3d;
+    animation: float 8s ease-in-out infinite;
+    overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
+    overscroll-behavior: contain;
+    margin: auto;
+    transform: none !important;
+    top: 0 !important;
+    left: 0 !important;
+    width: 90%;
+    max-width: 500px;
+}
+
+@keyframes float {
+    0%, 100% { transform: translateY(0) rotate(1deg); }
+    50% { transform: translateY(-15px) rotate(-1deg); }
+}
+
+.portal-title {
+    font-family: 'Orbitron', sans-serif;
+    font-size: clamp(1.8rem, 5vw, 2.5rem);
+    text-align: center;
+    margin-bottom: 30px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: white;
+    text-shadow: 
+        0 0 10px var(--cosmic-blue),
+        0 0 20px var(--neon-purple);
+    position: relative;
+}
+
+.portal-title::after {
+    content: "";
+    display: block;
+    width: 150px;
+    max-width: 60%;
+    height: 3px;
+    background: linear-gradient(90deg, transparent, var(--cosmic-blue), transparent);
+    margin: 15px auto;
+    border-radius: 50%;
+}
+
+.input-group {
+    position: relative;
+    margin-bottom: 25px;
+}
+
+.input-group input {
+    width: 100%;
+    padding: 16px 20px;
+    background: rgba(20, 20, 50, 0.6);
+    border: 1px solid rgba(100, 200, 255, 0.3);
+    border-radius: 10px;
+    color: white;
+    font-size: 1rem;
+    outline: none;
+    transition: all 0.3s ease-out;
+}
+
+.input-group input:focus {
+    border-color: var(--cosmic-blue);
+    box-shadow: 0 0 15px rgba(94, 159, 255, 0.5);
+    background: rgba(30, 30, 70, 0.8);
+}
+
+.input-group label {
+    position: absolute;
+    top: 16px;
+    left: 20px;
+    color: rgba(200, 220, 255, 0.8);
+    pointer-events: none;
+    transition: all 0.3s ease-out;
+    font-size: 1rem;
+}
+
+.input-group input:focus + label,
+.input-group input:valid + label {
+    top: -12px;
+    left: 15px;
+    font-size: 0.8rem;
+    background: var(--deep-space);
+    padding: 0 8px;
+    color: var(--cosmic-blue);
+    text-shadow: 0 0 5px var(--cosmic-blue);
+}
+
+.error-message {
+    position: absolute;
+    bottom: -20px;
+    right: 0;
+    color: var(--error-red);
+    font-size: 0.75rem;
+    opacity: 0;
+    transition: opacity 0.3s;
+}
+
+.input-group.error input {
+    border-color: var(--error-red);
+    box-shadow: 0 0 10px rgba(255, 77, 109, 0.5);
+}
+
+.input-group.error label {
+    color: var(--error-red);
+}
+
+.input-group.error .error-message {
+    opacity: 1;
+}
+
+.submit-btn,
+.reset-btn {
+    width: 100%;
+    padding: 16px;
+    background: linear-gradient(135deg, var(--cosmic-blue), var(--neon-purple));
+    border: none;
+    border-radius: 10px;
+    color: white;
+    font-size: 1rem;
+    font-weight: bold;
+    font-family: 'Orbitron', sans-serif;
+    letter-spacing: 2px;
+    cursor: pointer;
+    transition: all 0.3s ease-out;
+    position: relative;
+    overflow: hidden;
+    text-transform: uppercase;
+    margin-top: 15px;
+}
+
+.submit-btn:hover,
+.reset-btn:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 0 20px rgba(94, 159, 255, 0.6);
+}
+
+.submit-btn::before,
+.reset-btn::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+    transition: 0.5s;
+}
+
+.submit-btn:hover::before,
+.reset-btn:hover::before {
+    left: 100%;
+}
+
+.portal-footer {
+    text-align: center;
+    margin-top: 20px;
+    color: rgba(200, 220, 255, 0.7);
+    font-size: 0.9rem;
+}
+
+.portal-footer a {
+    color: var(--cosmic-blue);
+    text-decoration: none;
+    transition: all 0.3s;
+}
+
+.portal-footer a:hover {
+    text-shadow: 0 0 10px var(--cosmic-blue);
+}
+
+.success-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.9);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    z-index: 100;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 1s;
+}
+
+.success-overlay.active {
+    opacity: 1;
+    pointer-events: all;
+}
+
+.success-message {
+    font-family: 'Orbitron', sans-serif;
+    font-size: clamp(1.5rem, 5vw, 2.5rem);
+    color: var(--cosmic-blue);
+    text-shadow: 0 0 20px var(--cosmic-blue);
+    margin-bottom: 30px;
+    letter-spacing: 3px;
+    text-align: center;
+    padding: 0 20px;
+}
+
+.warp-animation {
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    border: 3px solid var(--cosmic-blue);
+    border-top-color: transparent;
+    animation: spin 2s linear infinite;
+    position: relative;
+}
+
+.warp-animation::before {
+    content: "";
+    position: absolute;
+    top: -8px;
+    left: -8px;
+    right: -8px;
+    bottom: -8px;
+    border-radius: 50%;
+    border: 3px solid var(--neon-purple);
+    border-bottom-color: transparent;
+    animation: spin 3s linear infinite reverse;
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+.cosmic-ring {
+    position: fixed;
+    border: 2px solid rgba(100, 200, 255, 0.1);
+    border-radius: 50%;
+    pointer-events: none;
+    z-index: 0;
+    transform-origin: center;
+}
+
+.ring-1 {
+    width: 150vmax;
+    height: 150vmax;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    animation: rotate 60s linear infinite;
+}
+
+.ring-2 {
+    width: 180vmax;
+    height: 180vmax;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    animation: rotate 80s linear infinite reverse;
+}
+
+@keyframes rotate {
+    0% { transform: translate(-50%, -50%) rotate(0deg); }
+    100% { transform: translate(-50%, -50%) rotate(360deg); }
+}
+
+.cosmic-portal, .input-group, .submit-btn, .reset-btn {
+    transform: translateZ(0);
+    backface-visibility: hidden;
+    will-change: transform, opacity;
+}
+
+@media (orientation: landscape) {
+  body {
+    display: flex !important;
+    justify-content: center !important;
+    align-items: center !important;
+    padding: 20px !important;
+    overflow: auto !important;
+    height: auto !important;
+    min-height: 100vh !important;
+  }
+
+  .cosmic-portal {
+    margin: 0 auto !important; /* Force center */
+    position: relative !important; /* Reset any weird positioning */
+    top: auto !important;
+    left: auto !important;
+    transform: none !important;
+  }
+}
+
